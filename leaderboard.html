@@ -1,0 +1,64 @@
+<head>
+  <title>Learnerboard</title>
+</head>
+
+<body>
+  <div id="outer">
+    {{> leaderboard}}
+  </div>
+</body>
+
+<template name="leaderboard">
+  <div class="leaderboard">
+    <table border="1">
+     <tr>
+	<th>Name</th>
+	<th>Backwards</th>	
+	<th>ALL CAPS</th>
+	<th>Shuffled</th>
+	<th># of Letters</th>
+	<th>Is...</th>
+	<th>Than</th>
+	<th>?</th>
+    </tr>
+    {{#each players}}
+      {{> player}}
+    {{/each}}
+    </table>
+    {{> new_player}}
+  </div>
+
+  {{#if selected_name}}
+  <div class="details">
+    <div class="name">{{selected_name}}</div>
+    <input type="button" class="inc" value="Give 5 points" />
+  </div>
+  {{else}}
+  <div class="none">Click a player to select</div>
+  {{/if}}
+</template>
+
+<template name="player">
+  <tr class="player {{selected}}">
+    <td class="name">{{name}}</td>
+    <td class="name">{{nameBackwards}}</td>
+    <td class="name">{{nameAllCaps}}</td>
+    <td class="name">{{nameShuffled}}</td>
+    <td class="name">{{name.length}}</td>
+    <td class="name"><select class="is" id="{{_id}}">
+        {{#each operators}}
+		<option {{selectedOp ../is this}}>{{this}}</option>
+        {{/each}}	
+	</select>
+    </td>
+    <td class="name">{{than}}</td>
+    <td class="name">{{eval}}</td>
+  </tr>
+</template>
+
+<template name="new_player">
+	<div class="new_player">
+		<input id="new_player_name" type="text" placeholder="Player name..." />
+		<input type="button" class="add" value="Add Player" />
+	</div>
+</template>
